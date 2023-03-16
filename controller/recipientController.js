@@ -1,4 +1,4 @@
-const Recipient = require('../models/recipient');
+const Recipient = require('../models/recipient.js');
 
 
 //here recipients is nothing but students

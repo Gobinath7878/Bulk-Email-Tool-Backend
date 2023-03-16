@@ -4,11 +4,11 @@ const nodemailer = require('nodemailer');
 const cors=require('cors');
 const dotenv=require('dotenv');
 const cookieParser=require('cookie-parser');
-// const Recipient = require('./models/Recipient.js');
-// const Teacher =require('./models/Teacher.js')
+const Recipient = require('./models/recipient');
+const Teacher =require('./models/teacher')
 const recipientRoute =require('./routes/recipient.js')
 const teacherRoute=require("./routes/teacher.js")
-const userRoute=require("./routes/users")
+const userRoute=require("./routes/users.js")
 
 dotenv.config()
 const app=express()
