@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose=require('mongoose')
-const nodemailer = require('nodemailer');
 const cors=require('cors');
 const dotenv=require('dotenv');
 const cookieParser=require('cookie-parser');

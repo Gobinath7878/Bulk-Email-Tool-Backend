@@ -1,4 +1,6 @@
 const Recipient = require('../models/Recipient.js');
+const nodemailer = require('nodemailer');
+
 
 
 //here recipients is nothing but students
@@ -84,6 +86,8 @@ exports.deleteRecipient =async(req,res)=>{
       });
   }
   };
+
+//send mail to recipients
 
   exports.sendemailRecipient = async (req, res) => {
     const { subject, message } = req.body;
