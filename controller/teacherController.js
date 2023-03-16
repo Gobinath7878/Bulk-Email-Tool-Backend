@@ -1,4 +1,4 @@
-const Teacher= require('../models/teacher');
+const Teacher= require('../models/Teacher.js');
 
 
 
