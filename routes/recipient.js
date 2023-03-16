@@ -9,6 +9,6 @@ router.get('/get/:id', recipientController.getRecipientById);
 router.post('/create', recipientController.addRecipient);
 router.put('/put/:id', recipientController.updateRecipient);
 router.delete('/delete/:id', recipientController.deleteRecipient);
-
+router.post('/send/mail',recipientController.sendemailRecipient)
 
 module.exports = router;

@@ -84,3 +84,41 @@ exports.deleteTeacher =async(req,res)=>{
       });
   }
   };
+
+  exports.sendemailTeacher = async (req, res) => {
+    const { subject, message } = req.body;
+    const teacherIds = req.body.teacher;
+  
+    try {
+      const teacher = await Teacher.find({ _id: { $in: teacherIds } });
+      if (!teacher || teacher.length === 0) {
+        return res.status(400).json({ message: 'No teacher found' });
+      }
+      const teacherEmails = teacher.map(teachers => teachers.email);
+  
+      // create reusable transporter object using the SMTP transport
+      const transporter = nodemailer.createTransport({
+        host: process.env.HOST,
+        port: 587,
+        secure: false,
+        auth: {
+          user: process.env.EMAIL_USERNAME,
+          pass: process.env.EMAIL_PASSWORD,
+        }
+      });
+  
+      // send mail with defined transport object
+      const mailOptions = {
+        from: process.env.EMAIL_USERNAME,
+        to: teacherEmails.join(', '),
+        subject,
+        text: message
+      };
+      const info = await transporter.sendMail(mailOptions);
+      console.log(`Message sent: ${info.messageId}`);
+      res.status(200).json({ message: 'Email sent successfully' });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: 'Error sending email' });
+    }
+  }
