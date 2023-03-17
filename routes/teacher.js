@@ -9,6 +9,6 @@ router.get('/get/:id', teacherController.getTeacherById);
 router.post('/create', teacherController.addTeacher);
 router.put('/put/:id', teacherController.updateTeacher);
 router.delete('/delete/:id',teacherController.deleteTeacher);
-router.post('/send/email',teacherController.sendemailTeacher);
+router.post('/send/mail',teacherController.sendemailTeacher);
 
 module.exports = router;

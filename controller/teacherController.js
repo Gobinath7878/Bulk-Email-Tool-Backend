@@ -1,4 +1,5 @@
 const Teacher= require('../models/Teacher.js');
+const nodemailer = require('nodemailer');
 
 
 
@@ -85,16 +86,17 @@ exports.deleteTeacher =async(req,res)=>{
   }
   };
 
+  // send mail to teachers
+  
   exports.sendemailTeacher = async (req, res) => {
     const { subject, message } = req.body;
-    const teacherIds = req.body.teacher;
-  
+    const teacherIds = req.body.teachers;
     try {
-      const teacher = await Teacher.find({ _id: { $in: teacherIds } });
-      if (!teacher || teacher.length === 0) {
-        return res.status(400).json({ message: 'No teacher found' });
+      const teachers = await Teacher.find({ _id: { $in: teacherIds } });
+      if (!teachers || teachers.length === 0) {
+        return res.status(400).json({ message: 'No teachers found' });
       }
-      const teacherEmails = teacher.map(teachers => teachers.email);
+      const teacherEmails = teachers.map(teacher => teacher.email);
   
       // create reusable transporter object using the SMTP transport
       const transporter = nodemailer.createTransport({
